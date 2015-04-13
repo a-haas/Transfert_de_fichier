@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
     }
     //Avec local port
     else{
-        sock = S_openAndBindSocket(atoi(argv[5]));
+        sock = S_openAndBindSocket(atoi(argv[4]));
         if(sock == -1){
             perror("S_openAndBindSocket");
             return -1;
