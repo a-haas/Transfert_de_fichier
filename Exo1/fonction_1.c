@@ -37,6 +37,5 @@ int S_receiveMessage(int sock_fd, struct sockaddr* dist_addr, void* msg, int len
 }
 
 int S_sendMessage (int sock_fd, struct sockaddr* dist_addr, void* msg, int length){
-	sendto(sock_fd, msg, length, 0, dist_addr, sizeof(struct sockaddr_in));
-	return 0;
+	return sendto(sock_fd, msg, length, 0, dist_addr, sizeof(struct sockaddr_in));
 }

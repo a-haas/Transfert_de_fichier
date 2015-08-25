@@ -1,0 +1,11 @@
+Les différentes questions que nous avons traitées sont :
+
+1- Les 5 fonctions, fonctionnelles et renvoyant les bonnes valeurs (-1 en cas d'erreurs, etc...)
+
+2- Le transfert de fichiers réalisé en TP fonctionnant à l'aide des 5 fonctions précédentes sans prendre en compte la perte de paquets.
+
+3- L'implémentation en IPv4 ou IPv6 à l'aide d'une valeur S_DOMAIN modifiable à l'aide des arguments des programmes (4 pour IPv4 et 6 IPv6)
+
+4- Le protocole bit alterné vu en cours et TD.
+
+5- Le protocole GoBackN vu en cours et TD mais sans l'utilisation de modulo et avec utilisation d'ack, pas de piggybacking.

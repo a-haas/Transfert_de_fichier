@@ -1,0 +1,99 @@
+TEST 1:
+---------
+image size:	1580067Mo
+error rate:	0.5
+delay:		0
+
+
+	 PROTOCOLE DE BIT ALTERNE						PROTOCOLE GO BACK N
+ -----------------------------------------------	| 	----------------------------------------------------
+							|
+       Receiver			 Sender			|		Receiver			Sender
+ --------------------	-----------------------		| 	--------------------		----------------------
+ real    38m30.328s	real    38m30.430s		|	real    0m2.938s		real    0m2.014s
+ user    0m0.010s	user    0m0.010s		|	user    0m0.010s		user    0m0.020s
+ sys     0m0.060s	sys     0m0.100s		|	sys     0m0.000s		sys     0m0.000s
+							|
+L’échange de données n’a pas été terminé.		|
+On a dû l’interrompre car il était très lent.		|
+
+********************************************************************************************************************
+
+TEST 2:
+-------
+file size:	1074Mo
+error rate:	0.5
+delay:		0
+
+	 PROTOCOLE DE BIT ALTERNE						PROTOCOLE GO BACK N
+ -----------------------------------------------	| 	----------------------------------------------------
+							|
+       Receiver			 Sender			|		Receiver			Sender
+ --------------------	-----------------------		| 	----------------------		----------------------
+ real    0m21.175s	real    0m20.023s		|	real    0m3.064s		real    0m2.005s
+ user    0m0.010s	user    0m0.010s		|	user    0m0.000s		user    0m0.010s
+ sys     0m0.000s	sys     0m0.000s		|	sys     0m0.010s		sys     0m0.000s
+
+
+********************************************************************************************************************
+
+TEST 3:
+--------
+
+file size:	1074Mo
+error rate:	0.5
+delay:		0.5
+
+	 PROTOCOLE DE BIT ALTERNE						PROTOCOLE GO BACK N
+ -----------------------------------------------	| 	----------------------------------------------------
+							|
+       Receiver			 Sender			|		Receiver			Sender
+ --------------------	-----------------------		| 	----------------------		----------------------
+ real    0m24.707s	real    7m57.110s		|	real    6m16.001s		real    0m2.005s
+ user    0m0.010s	user    0m0.030s		|	user    0m0.010s		user    0m0.010s
+ sys     0m0.000s	sys     0m0.000s		|	sys     0m0.000s		sys     0m0.000s
+	
+Dans les deux protocoles, le receiver n’a pas pu se terminer car le delay est assez élevé pour un fichier de cette taille.
+
+********************************************************************************************************************
+
+TEST 4:
+--------
+
+file size:	151Mo
+error rate:	0.5
+delay:		0.5
+
+	 PROTOCOLE DE BIT ALTERNE						PROTOCOLE GO BACK N
+ -----------------------------------------------	| 	----------------------------------------------------
+							|
+       Receiver			 Sender			|		Receiver			Sender
+ --------------------	-----------------------		| 	---------------------		----------------------
+ real    0m19.039s	real    0m17.526s		|	real    1m24.470s		real    0m2.005s
+ user    0m0.010s	user    0m0.010s		|	user    0m0.000s		user    0m0.010s
+ sys     0m0.000s	sys     0m0.000s		|	sys     0m0.000s		sys     0m0.010s
+
+Avec  un fichier de très petite taille et le même delay que sur le TEST 3 le receiver arrive à se terminer.
+
+********************************************************************************************************************
+
+TEST 5:
+--------
+
+file size:	151Mo
+error rate:	0.9
+delay:		0.2
+
+	 PROTOCOLE DE BIT ALTERNE						PROTOCOLE GO BACK N
+ -----------------------------------------------	| 	----------------------------------------------------
+							|
+       Receiver			 Sender			|		Receiver			Sender
+ --------------------	-----------------------		| 	---------------------		----------------------
+ real    0m24.952s	real    0m24.633s		|	real    0m14.728s		real    0m2.004s
+ user    0m0.010s	user    0m0.010s		|	user    0m0.010s		user    0m0.010s
+ sys     0m0.000s	sys     0m0.000s		|	sys     0m0.000s		sys     0m0.000s
+
+
+********************************************************************************************************************
+
+Dans tous les tests, l’algorithme GoBackN ne termine pas quand on rajoute un delay. Mais on peut constater que le transfert de fichier entre le client et le serveur est beaucoup plus rapide avec cette algorithme la que avec l’algorithme du Bit Alterné. 

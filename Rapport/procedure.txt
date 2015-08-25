@@ -1,0 +1,21 @@
+					EXECUTION
+-----------------------------------------------------------------------------------------------------
+
+./mediumTuring <IPversion> <local_port> <host1> <port1> <host2> <port2> <error_rate> <delay>
+./receiver  <ip_version> <filename> <local_port>
+./sender <ip_version> <filename> <distant_host> <distant_port> [<local_port>]
+
+					EXEMPLES
+				-----------------------
+
+IPv4:
+------
+./mediumTuring 4 1024 127.0.0.1 2048 127.0.0.1 4096 0.5 0
+./receiver 4 copy2 2048
+./sender 4 copy.jpg 127.0.0.1 1024 4096
+
+IPv6:
+------
+./mediumTuring  4 1024 ::1 2048 ::1 4096 0.5 0
+./receiver 4 copy2 2048
+./sender 4 copy.jpg ::1 1024 4096

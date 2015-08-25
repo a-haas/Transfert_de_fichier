@@ -1,0 +1,116 @@
+Structure des datagrammes :
+
+-struct buffer :
+
+	typedef struct buffer{
+    	char msg[BUFFER_LENGTH];
+    	int taille;
+	}*Buffer;
+
+	Contient la partie du fichier lu, msg, ainsi que la taille de celui-ci pour pouvoir finir le protocole, ex :
+		if(buffer->taille < BUFFER_LENGTH)
+			//finir le protocole (vrai pour exercice 2)
+
+-struct go_back_n ou struct data_struct :
+
+	typedef struct go_back_n{
+	    struct buffer buf;
+	    int seq;
+	}*Distant_data, local_data;
+
+	Contient un struct buffer qui est le message que l'on désire envoyé et celui-ci est encapsulé dans cette structure pour qu'il soit numéroté à l'aide d'un numéro de séquence (0 ou 1 pour bit alterné ou alors de 0 à n pour GoBackN)
+
+-struct ack :
+
+	typedef struct ack{
+		int num_ack;
+	}*Ack, ack;
+
+	Encapsulation d'un int pour représenter un ack. L'acquittement permet de savoir quel est le prochain numéro de séquence attendu.
+
+Description des protocoles :
+	-Exercice 2
+
+	Client
+
+	Lire le fichier
+	Envoyer le datagramme avec la taille lue et les octets lus
+	Si la taille lu est inférieur à la taille totale possible d'un buffer
+		Finir le protocole
+	Sinon continuer à lire le fichier
+
+
+	Serveur
+
+	Recevoir le datagramme avec la taille lue et les octets lus
+	Ecrire dans le fichier avec la taille du buffer
+	Si la taille du buffer est inférieur à la taille totale possible d'un buffer
+		Finir le protocole
+	Sinon continuer à recevoir les datagrammes et écrire
+
+
+	-Exercice 4
+
+	Client
+
+	Lire le fichier
+	Envoyer le datagramme avec la taille lue et les octets lus
+	Recevoir l'acquittement
+	Si bon acquittement
+		Continuer la lecture et l'envoi
+		Si la taille lu est inférieur à la taille totale possible d'un buffer
+			Finir le protocole
+		Sinon continuer la lecture et l'envoi
+	Sinon //Si timeout ou mauvais acquittement
+		Réemettre le datagramme
+
+
+	Serveur
+
+	Recevoir le datagramme avec la taille lue et les octets lus
+	Si c'est le bon numéro de séquence
+		Envoyer l'acquitemment avec le numéro de séquence plus un
+		Ecrire dans le fichier avec la taille du buffer
+		Si la taille du buffer est inférieur à la taille totale possible d'un buffer
+			Finir le protocole
+	Sinon continuer à envoyer l'acquittement avec le numéro de séquence désiré
+
+
+	-Exercice 5
+
+	Client
+
+	Lire le fichier
+	Envoyer les datagramme avec la taille lue et les octets lus jusqu'à ce qu'il n'y ait plus de places disponibles dans la fenêtre
+	Recevoir l'acquittement
+	Si bon acquittement (celui attendu ou supérieur)
+		Libérer de la place dans la fenêtre
+		Continuer la lecture
+		Envoyer la nouvelle fenêtre 
+		Si la taille lu est inférieur à la taille totale possible d'un buffer
+			Finir le protocole
+		Sinon continuer la lecture et l'envoi
+	Sinon //Si timeout ou mauvais acquittement
+		Réemettre la fenêtre d'émission
+
+
+	Serveur
+
+	Recevoir le datagramme avec la taille lue et les octets lus
+	Si c'est le bon numéro de séquence
+		Envoyer l'acquitemment avec le numéro de séquence plus un
+		Ecrire dans le fichier avec la taille du buffer
+		Si la taille du buffer est inférieur à la taille totale possible d'un buffer
+			Finir le protocole
+	Sinon continuer à envoyer l'acquittement avec le numéro de séquence désiré
+
+
+Fin du protocole :
+	Exercice 2 :
+		Fermer le client et le serveur
+
+	Exercice 4 :
+		Le serveur envoie 20 ack et le client doit en recevoir un pour se finir
+
+	Exercice 5 :
+		Idem que l'exercice 4.
